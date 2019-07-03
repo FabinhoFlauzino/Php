@@ -11,7 +11,7 @@
 
     echo $nome;
 
-    echo "<br/>"
+    echo "<br/>";
 
     if(isset($nome)){
         //isset verifica se a variavel $nome ja esta sendo usada e mostra na tela
