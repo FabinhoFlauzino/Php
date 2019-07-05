@@ -1,6 +1,6 @@
 <?php
 
-class Pessao{
+class Pessoa{
 
     public $nome; //criando atributos
 
@@ -11,7 +11,7 @@ class Pessao{
     }
 }
 
-$fabio = new Pessao();
+$fabio = new Pessoa();
 $fabio->nome = "Fabinho Flauzino";
 echo $fabio->falar();
 
