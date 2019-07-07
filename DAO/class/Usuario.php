@@ -4,7 +4,7 @@ class Usuario{
 
     private $idusuario;
     private $deslogin;
-    private $dessenha;
+    private $dessenha;          //declaração de variaveis mesma que esta na tabela do banco
     private $dtcadastro;
 
     public function getIdusuario(){
@@ -39,7 +39,7 @@ class Usuario{
         $this->dtcadastro = $value;
     }
 
-    public function loadById($id){
+    public function loadById($id){ //função para pegar elemento do banco pelo ID
 
         $sql = new Sql();
 
@@ -57,8 +57,8 @@ class Usuario{
         }
     }
 
-    public function __toString(){
-
+    public function __toString(){ //função que trata o resultado vindo da tabela do banco e transforma em json
+                                  //Faz o tratamento para mostrar os dados na tela ou em tabelas
         return json_encode(array(
             "idusuario"=>$this->getIdusuario(),
             "deslogin"=>$this->getDeslogin(),
@@ -66,6 +66,45 @@ class Usuario{
             "dtcadastro"=>$this->getDtcadastro()->format("d/m/Y")
         ));
     }
+
+    //listar todos usuarios
+    public static function getList(){ // vantagem se ser statico é que pode chamar ele direto na index usando ::
+        $sql = new Sql();
+
+        return $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin");
+    }
+
+    public static function search($login){//lista atraves do nome do login
+        $sql = new Sql();
+
+        return $sql->select("SELECT * FROM tb_usuarios WHERE deslogin LIKE :SEARCH ORDER BY deslogin", array(
+            ':SEARCH'=>"%".$login."%"
+        ) );
+    }
+
+
+    public function login($login, $password){
+        $sql = new Sql();
+
+        $results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND dessenha = :PASSWORD", array(
+            ":LOGIN"=>$login,
+            ":PASSWORD"=>$password
+        ));
+
+        if (count($results)> 0 ) {
+            $row = $results[0];
+
+            $this->setIdusuario($row['idusuario']);
+            $this->setDeslogin($row['deslogin']);
+            $this->setDessenha($row['dessenha']);
+            $this->setDtcadastro(new DateTime($row['dtcadastro']));
+        } else {
+            throw new Exception("Login e/ou senha invalidos");
+            
+        }
+    }
+
+
 }
 
 
