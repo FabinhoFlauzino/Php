@@ -18,8 +18,13 @@ echo $root; //mostra o resultado */
 
 
 //carrega um usuario usando login e senha
-$usuario = new Usuario();
-$usuario->login("Fulano","4567");
-echo $usuario;
+//$usuario = new Usuario();
+//$usuario->login("Fulano","4567");
+//echo $usuario;
 
+$aluno = new Usuario("aluno","@lun0");
+
+$aluno->insert();
+
+echo $aluno;
 ?>
