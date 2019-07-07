@@ -22,9 +22,16 @@ echo $root; //mostra o resultado */
 //$usuario->login("Fulano","4567");
 //echo $usuario;
 
-$aluno = new Usuario("aluno","@lun0");
+//criando um novo usuario
+//$aluno = new Usuario("aluno","@lun0");
+//$aluno->insert();
+//echo $aluno;
 
-$aluno->insert();
+$usuario = new Usuario();
 
-echo $aluno;
+$usuario->loadById(6);
+
+$usuario->update("professor", "¨$#@@");
+
+echo $usuario;
 ?>
