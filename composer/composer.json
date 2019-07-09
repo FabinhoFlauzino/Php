@@ -1,0 +1,7 @@
+{
+    "name": "FabinhoFlauzino/composer",
+    "description": "Composer com PHP7",
+    "require": {
+        "phpmailer/phpmailer": "~6.0"
+    }   
+}
